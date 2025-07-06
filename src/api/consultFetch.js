@@ -39,7 +39,7 @@ export const consultFetch = async (url, option = {}) => {
   }
 };
 
-consultFetch("http://localhost:3000/api/v1/auth/login", {
+/* consultFetch("http://localhost:3000/api/v1/auth/login", {
   method: 'POST',
   body: JSON.stringify({
     "user_email": "primero@gmail.com",
@@ -49,4 +49,4 @@ consultFetch("http://localhost:3000/api/v1/auth/login", {
       "Content-Type": "application/json",
     }
 
-})
+}) */
