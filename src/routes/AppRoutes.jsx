@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, Route, Router, Routes } from 'react-router'
-import { Blog, Dashboard, Login, Register } from '../pages'
+import { Blog, Dashboard, Login, RegisterPublic } from '../pages'
 import { ProtectedRoute } from '../utils/protectedRoute'
 
 
@@ -11,7 +11,7 @@ export const AppRoutes = () => {
         <Routes>
             {/* Rutas públicas */}
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<RegisterPublic />} />
             <Route path="/blog" element={<Blog />} />
 
             {/* Rutas protegidas */}

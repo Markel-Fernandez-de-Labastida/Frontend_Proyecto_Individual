@@ -12,7 +12,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
 
   
 
-  const login = async (url, body, header = {}) => {
+  const loginRegister = async (url, body, header = {}) => {
     console.log("Dentro del fetch login")
     setIsLoading(true);
     const options = {
@@ -114,7 +114,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
   }
 
   return {
-    login,
+    loginRegister,
     update,
     create,
     delet,

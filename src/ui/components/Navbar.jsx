@@ -18,7 +18,7 @@ export const Navbar = () => {
                     </li>
                     <li>
                         <NavLink
-                            to='/registro'
+                            to='/register'
                             className={({ isActive }) => isActive ? 'activo' : ''}>
                             Registro
                         </NavLink>

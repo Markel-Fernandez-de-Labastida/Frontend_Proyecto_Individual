@@ -5,13 +5,18 @@ import { useForm } from '../hooks/useForm.js';
 
 export const Login = () => {
 
+    const navigate = useNavigate();
+
     const { handleSubmit, formulario, enviado } = useForm({});
 
-    const { login, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
 
     useEffect(() => {
-        Object.keys(formulario).length !== 0 && login("http://localhost:3000/api/v1/auth/login", formulario)
+        Object.keys(formulario).length !== 0 && loginRegister("http://localhost:3000/api/v1/auth/login", formulario)
         console.log(data)
+        if (data.ok) {
+            navigate("/dashboard");
+        }
     }, [formulario])
 
 
@@ -23,16 +28,16 @@ export const Login = () => {
                 <h2>Iniciar Sesión</h2>
                 <input
                     type="text"
-                    id="email"
-                    name="email"
+                    id="user_email"
+                    name="user_email"
                     placeholder="Nombre de usuario"
                     value={formulario.username}
                 //onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                 />
                 <input
                     type="password"
-                    id="password"
-                    name="password"
+                    id="user_password"
+                    name="user_password"
                     placeholder="Contraseña"
                     value={formulario.password}
                 //onChange={(e) => setFormData({ ...formData, password: e.target.value })}
