@@ -930,6 +930,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"autobind-decorator@npm:^2.4.0":
+  version: 2.4.0
+  resolution: "autobind-decorator@npm:2.4.0"
+  checksum: 10c0/b31781d582e24b69aa88017046613e4f88e59f33f81c38c2885435c790fc8b4b1f52daf148c63cd609101795873daaae78aeb6c00b110a08dcbecefdcabc17f1
+  languageName: node
+  linkType: hard
+
 "balanced-match@npm:^1.0.0":
   version: 1.0.2
   resolution: "balanced-match@npm:1.0.2"
@@ -1033,6 +1040,7 @@ __metadata:
     eslint-plugin-react-hooks: "npm:^5.2.0"
     eslint-plugin-react-refresh: "npm:^0.4.20"
     globals: "npm:^16.2.0"
+    jodit-react: "npm:^5.2.19"
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     react-router: "npm:^7.6.3"
@@ -1691,6 +1699,27 @@ __metadata:
     "@pkgjs/parseargs":
       optional: true
   checksum: 10c0/6acc10d139eaefdbe04d2f679e6191b3abf073f111edf10b1de5302c97ec93fffeb2fdd8681ed17f16268aa9dd4f8c588ed9d1d3bffbbfa6e8bf897cbb3149b9
+  languageName: node
+  linkType: hard
+
+"jodit-react@npm:^5.2.19":
+  version: 5.2.19
+  resolution: "jodit-react@npm:5.2.19"
+  dependencies:
+    jodit: "npm:^4.6.2"
+  peerDependencies:
+    react: ~0.14 || ^15 || ^16 || ^17 || ^18 || ^19
+    react-dom: ~0.14 || ^15 || ^16 || ^17 || ^18 || ^19
+  checksum: 10c0/51a145f48f22f02b233e6a19122a76d27ad5a3136b738c85daffd54fc0feae30a24d421f1c41942ea555375cd4519323549d7905e0a1e6d8af9fafaf6dd42a1d
+  languageName: node
+  linkType: hard
+
+"jodit@npm:^4.6.2":
+  version: 4.6.2
+  resolution: "jodit@npm:4.6.2"
+  dependencies:
+    autobind-decorator: "npm:^2.4.0"
+  checksum: 10c0/5fa2ed2ea36ba15c919a4541f192eeead6e1116e73d095be5494690ec74854416243ad950f1b1b919c2994da19289104db938b6e8c2bd69483a639e32a77ab8a
   languageName: node
   linkType: hard
 
