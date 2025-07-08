@@ -12,7 +12,7 @@ export const Login = () => {
     const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
 
     useEffect(() => {
-        Object.keys(formulario).length !== 0 && loginRegister("http://localhost:3000/api/v1/auth/login", formulario)
+        Object.keys(formulario).length !== 0 && loginRegister(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/login`, formulario)
         console.log(data)
         if (data.ok) {
             navigate("/dashboard");

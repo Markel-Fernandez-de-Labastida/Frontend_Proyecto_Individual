@@ -13,7 +13,7 @@ export const RegisterPublic = () => {
     /* const [formData, setFormData] = useState({ username: '', password: '', role: '' });*/
 
     useEffect(() => {
-        Object.keys(formulario).length !== 0 && loginRegister("http://localhost:3000/api/v1/auth/register", formulario)
+        Object.keys(formulario).length !== 0 && loginRegister(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/register`, formulario)
         console.log("final: ", data)
         if (data.ok) {
             navigate("/login");
