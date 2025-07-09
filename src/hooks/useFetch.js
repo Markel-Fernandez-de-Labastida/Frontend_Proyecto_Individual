@@ -9,8 +9,26 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
 
+   const Get = async (url, body, header = {}) => {
+    console.log("Dentro del fetch get")
+    setIsLoading(true);
 
-  
+
+
+    const answer = await consultFetch(url)
+      .then((response) => {
+          setData(response);
+          console.log("Response: ", response);
+        })
+      .catch((error) => {
+          setIsError(error);
+          console.log("error: ", error);
+        })
+    //console.log("use fetch login: ", answer)
+
+    setIsLoading(false);
+    
+  }
 
   const loginRegister = async (url, body, header = {}) => {
     console.log("Dentro del fetch login")

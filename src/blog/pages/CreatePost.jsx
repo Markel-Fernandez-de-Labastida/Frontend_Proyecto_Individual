@@ -64,7 +64,7 @@ export const CreatePost = () => {
                 {/*<input type="text" name="post_content" id="post_content" placeholder='Contenido de la noticia' />*/}
                 <input type="hidden" name="date_insert" id='date_insert' value={formatDate()} />
 
-                <button type="submit">Crear oticia</button>
+                <button type="submit">Crear noticia</button>
             </form>
         </>
 

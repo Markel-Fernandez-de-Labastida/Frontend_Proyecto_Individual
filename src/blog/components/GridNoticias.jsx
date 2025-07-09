@@ -1,6 +1,15 @@
 import React from 'react'
 
-export const GridNoticias = (id_post, user) => {
+export const GridNoticias = (/* id_post, user_name, post_title, post_subtitle, post_content, date_insert */) => {
+
+    const formulario = {};
+    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+
+    useEffect(() => {
+        Object.keys(formulario).length !== 0 && fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/AllPosts`)
+
+    }, [])
+
     return (
         <>
             <section>
@@ -8,9 +17,10 @@ export const GridNoticias = (id_post, user) => {
                     {
                         /* llamar a la api y crear una card por cada resultado */
 
-                        data.map((imagen) => {
+                        data.map((item, index, arrray) => {
                             /* CARD */
-                            <Card key={imagen} imagen={imagen} />
+                            imagen
+                            <Card key={item.id_post} id_post={item.id_post} user_name={item.user_name} post_title={item.post_title} post_subtitle={item.post_subtitle} post_content={item.post_content} date_insert={item.date_insert} />
 
                         })
 
