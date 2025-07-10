@@ -19,7 +19,6 @@ export const GridNoticias = (/* id_post, user_name, post_title, post_subtitle, p
 
                         data.map((item, index, arrray) => {
                             /* CARD */
-                            imagen
                             <Card key={item.id_post} id_post={item.id_post} user_name={item.user_name} post_title={item.post_title} post_subtitle={item.post_subtitle} post_content={item.post_content} date_insert={item.date_insert} />
 
                         })
