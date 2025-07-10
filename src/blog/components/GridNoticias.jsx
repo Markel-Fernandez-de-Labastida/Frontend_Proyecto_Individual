@@ -1,27 +1,46 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useFetch } from '../../hooks/useFetch';
+import { Card } from './Card';
 
 export const GridNoticias = (/* id_post, user_name, post_title, post_subtitle, post_content, date_insert */) => {
 
-    const formulario = {};
-    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+    const { get, data, isLoading, isError } = useFetch();
 
     useEffect(() => {
-        Object.keys(formulario).length !== 0 && fetch(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/AllPosts`)
+        get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/AllPosts`)
 
     }, [])
 
     return (
         <>
             <section>
+
+
+                <p>DATA</p>       {JSON.stringify(data)}
+
                 <div className='card-container'>
                     {
-                        /* llamar a la api y crear una card por cada resultado */
+                        isLoading ?
 
-                        data.map((item, index, arrray) => {
-                            /* CARD */
-                            <Card key={item.id_post} id_post={item.id_post} user_name={item.user_name} post_title={item.post_title} post_subtitle={item.post_subtitle} post_content={item.post_content} date_insert={item.date_insert} />
+                            <h1>CARGANDO.........</h1>
 
-                        })
+                            :
+
+                            isError ?
+                                <p>error</p>
+                                :
+                                /* llamar a la api y crear una card por cada resultado */
+                                <>
+                                    <p>Sin error</p>
+                                    {data.map((item) => (
+                                        // <h1>CARD EN EL MAP {JSON.stringify(item)}</h1>
+                                        <Card key={item.id_post} item={item} />
+
+
+                                    ))}
+                                </>
+
+
 
 
                     }

@@ -1044,6 +1044,7 @@ __metadata:
     react: "npm:^19.1.0"
     react-dom: "npm:^19.1.0"
     react-router: "npm:^7.6.3"
+    sweetalert2: "npm:^11.22.2"
     vite: "npm:^7.0.2"
   languageName: unknown
   linkType: soft
@@ -2459,6 +2460,13 @@ __metadata:
   dependencies:
     has-flag: "npm:^4.0.0"
   checksum: 10c0/afb4c88521b8b136b5f5f95160c98dee7243dc79d5432db7efc27efb219385bbc7d9427398e43dd6cc730a0f87d5085ce1652af7efbe391327bc0a7d0f7fc124
+  languageName: node
+  linkType: hard
+
+"sweetalert2@npm:^11.22.2":
+  version: 11.22.2
+  resolution: "sweetalert2@npm:11.22.2"
+  checksum: 10c0/e4d2b6822ad9ee9fc71e384ca5bb126cac8ad93fa99e300ce58444b8cbcdaf1d4c94a06bc855947ebe00a7aeb84bb64f9616b6a5d0c9bb5a0e01d3306670c28a
   languageName: node
   linkType: hard
 

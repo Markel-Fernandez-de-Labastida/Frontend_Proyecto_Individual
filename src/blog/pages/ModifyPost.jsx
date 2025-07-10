@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useNavigate, useParams } from 'react-router';
+import { useForm } from '../../hooks/useForm';
+import { useFetch } from '../../hooks/useFetch';
 
-export const ModifyPost = (id_post, post_title, post_subtitle, post_content, date_insert) => {
+export const ModifyPost = () => {
     const navigate = useNavigate();
+
+    const { id_post } = useParams();
 
     // TODO: Recoger desde el token el id del usuario editor
     // React Jodit WYSIWYG Editor
@@ -27,7 +32,12 @@ export const ModifyPost = (id_post, post_title, post_subtitle, post_content, dat
 
     const { handleSubmit, formulario, enviado } = useForm({});
 
-    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+    const { get, loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+
+    useEffect(() => {
+        get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/AllDetails/${id_post}`)
+    }, [])
+
 
     useEffect(() => {
         Object.keys(formulario).length !== 0 && update(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Update`, formulario)
@@ -40,16 +50,17 @@ export const ModifyPost = (id_post, post_title, post_subtitle, post_content, dat
         <>
             <div>
                 <p>Editar noticia</p>
+
             </div>
 
             <form action="#" method="post" onSubmit={handleSubmit}>
-                <input type="hidden" name="post_user" id='post_user' value={id_post} />
-                <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' value={post_title} />
-                <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' value={post_subtitle} />
+                <input type="hidden" name="post_user" id='post_user' value={item.id_post} />
+                <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' value={item.post_title} />
+                <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' value={item.post_subtitle} />
                 {/* TODO: Usar react det text = React Jodit WYSIWYG Editor */}
                 <JoditEditor
                     ref={editor}
-                    value={content}
+                    value={item.post_content}
                     config={config}
                     tabIndex={1}
                     name="post_content" id="post_content"

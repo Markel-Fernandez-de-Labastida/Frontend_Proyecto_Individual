@@ -1,9 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useFetch } from '../hooks/useFetch.js';
 import { useForm } from '../hooks/useForm.js';
+import { UserContext } from '../contexts/UserContext.jsx';
 
 export const Login = () => {
+    const { user, setUser, isRegister, setRegister } = useContext(UserContext)
+
 
     const navigate = useNavigate();
 
@@ -14,7 +17,10 @@ export const Login = () => {
     useEffect(() => {
         Object.keys(formulario).length !== 0 && loginRegister(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/login`, formulario)
         console.log(data)
+
         if (data.ok) {
+            setUser(data);
+            setRegister(true);
             navigate("/dashboard");
         }
     }, [formulario])

@@ -3,7 +3,7 @@ import { GridNoticias } from '../components/GridNoticias';
 import { useFetch } from '../../hooks/useFetch';
 
 export const DashboardEditor = () => {
-    
+
 
 
     return (

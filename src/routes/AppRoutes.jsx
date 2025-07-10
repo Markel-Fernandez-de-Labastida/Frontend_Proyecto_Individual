@@ -5,20 +5,43 @@ import { ProtectedRoute } from '../utils/protectedRoute'
 import { CreatePost, DashboardEditor, DeletePost, ModifyPost } from '../blog/pages'
 import { DashboarsAdmin } from '../admin/pages/DashboarsAdmin'
 import { CreateUser, DeleteUser, ModifyUser, CreatePostAdmin, ModifyPostAdmin, DeletePostAdmin } from '../admin/pages'
+import { UserProvider } from '../contexts/UserProvider'
 
 
 
 export const AppRoutes = () => {
+
+    // const {isRegister,user}=useContext(userContext)
+
+    const user = {
+        id: 1,
+        role: 'editor',
+        nombre: 'Pepe'
+    }
+    const isRegister = true
+
     return (
+        <UserProvider>
+            <Routes>
+                {/* Rutas públicas */}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<RegisterPublic />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<Blog />} />
 
-        <Routes>
-            {/* Rutas públicas */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<RegisterPublic />} />
-            <Route path="/blog" element={<Blog />} />
+                {/* Rutas protegidas Editor*/}
+                {
 
-            {/* Rutas protegidas Editor*/}
-            <Route
+                    (isRegister && user.role == 'editor') &&
+
+                    <Route Route path="editor">
+                        <Route index element={<DashboardEditor />} />
+                        <Route path="nuevo-post" element={<CreatePost />} />
+                        <Route path="editar-post/:id" element={<ModifyPost />} />
+                    </Route>
+                }
+
+                {/* <Route
                 path="/dashboardEditor"
                 element={
                     <DashboardEditor />
@@ -39,59 +62,66 @@ export const AppRoutes = () => {
                 path='/deletePostEditor'
                 element={
                     < DeletePost />
-                } />
+                } /> */}
 
-            {/* Rutas protegidas Administrador*/}
+                {/* Rutas protegidas Administrador*/}
+                {/* 
+            <Route path="admin">
+                <Route index element={<DashboarsAdmin />} />
+                <Route path=":city" element={<City />} />
+                <Route path="trending" element={<Trending />} />
+            </Route> */}
 
-            <Route
-                path='/dashboardAdmin'
-                element={
-                    < DashboarsAdmin />
-                } />
+                <Route
+                    path='/dashboardAdmin'
+                    element={
+                        < DashboarsAdmin />
+                    } />
 
-            {/* Usuarios */}
+                {/* Usuarios */}
 
-            <Route
-                path='/createUser'
-                element={
-                    < CreateUser />
-                } />
+                <Route
+                    path='/createUser'
+                    element={
+                        < CreateUser />
+                    } />
 
-            <Route
-                path='/updateUser'
-                element={
-                    < ModifyUser />
-                } />
+                <Route
+                    path='/updateUser'
+                    element={
+                        < ModifyUser />
+                    } />
 
-            <Route
-                path='/deleteUser'
-                element={
-                    < DeleteUser />
-                } />
-            {/* Blog */}
-            <Route
-                path='/createPost'
-                element={
-                    < CreatePostAdmin />
-                } />
+                <Route
+                    path='/deleteUser'
+                    element={
+                        < DeleteUser />
+                    } />
+                {/* Blog */}
+                <Route
+                    path='/createPost'
+                    element={
+                        < CreatePostAdmin />
+                    } />
 
-            <Route
-                path='/updatePost'
-                element={
-                    < ModifyPostAdmin />
-                } />
+                <Route
+                    path='/updatePost'
+                    element={
+                        < ModifyPostAdmin />
+                    } />
 
-            <Route
-                path='/DeletePost'
-                element={
-                    < DeletePostAdmin />
-                } />
+                <Route
+                    path='/DeletePost'
+                    element={
+                        < DeletePostAdmin />
+                    } />
 
 
-            {/* Ruta de acceso denegado */}
-            <Route path="/unauthorized" element={<h2>Acceso no autorizado</h2>} />
-            <Route path='/*' element={< Navigate to={'./'} />} />
-        </Routes>
+                {/* Ruta de acceso denegado */}
+                <Route path="/unauthorized" element={<h2>Acceso no autorizado</h2>} />
+                <Route path='/*' element={< Navigate to={'./'} />} />
+            </Routes >
+        </UserProvider>
 
     )
 }

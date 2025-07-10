@@ -1,29 +1,42 @@
 import React from 'react'
 import { CardCompleto } from './CardCompleto'
+import { Link, redirect } from 'react-router';
+import Swal from 'sweetalert2';
+import { useFetch } from '../../hooks/useFetch';
 
-export const Card = (id_post, user_name, post_title, post_subtitle, post_content, date_insert) => {
+export const Card = ({ item }) => {
 
-    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
 
     const deleteNoticia = () => {
-        useEffect(() => {
-        Object.keys(formulario).length !== 0 && delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Delete`, id_post)
-        console.log(data)
-    }, [formulario])
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showConfirmButton: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            denyButtonText: `Eliminar`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isDenied) {
+                Swal.fire("Borrado", "", "success");
+                delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Delete`, item.id_post)
+                //redirect("`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/dashboardEditor")
+                console.log(data)
+            }
+        });
+
     }
-    
+
 
     return (
         <>
-            <article key={''} className=''>
-                <p data-id_post={id_post}></p>
-                <h2 className=''>{post_title}</h2>
-                <p className=''>{user_name}</p>
-                <p className=''>{date_insert}</p>
-                <button onClick={<CardCompleto id_post={id_post} post_title={post_title} post_subtitle={post_subtitle} post_content={post_content} date_insert={date_insert} />} className=''>Ver</button>
-                <button onClick={<ModifyPost id_post={id_post} post_title={post_title} post_subtitle={post_subtitle} post_content={post_content} date_insert={date_insert} />} className=''>Modificar</button>
-                <button onClick={deleteNoticia()} className=''>Borrar</button>
-            </article >
+            <article>
+                <h2>{item.post_title}</h2>
+                <p>{item.user_name}</p>
+                <Link to={`blog/${item.id_post}`}>Ver</Link>
+                <Link to={`editar-post/${item.id_post}`}>Editar</Link>
+                <button onClick={deleteNoticia}>Borrar</button>
+            </article>
         </>
     )
 }
