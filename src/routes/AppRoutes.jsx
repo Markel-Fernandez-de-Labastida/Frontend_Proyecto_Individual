@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Navigate, Route, Router, Routes } from 'react-router'
 import { Blog, Dashboard, Login, RegisterPublic } from '../pages'
 import { ProtectedRoute } from '../utils/protectedRoute'
@@ -6,19 +6,21 @@ import { CreatePost, DashboardEditor, DeletePost, ModifyPost } from '../blog/pag
 import { DashboarsAdmin } from '../admin/pages/DashboarsAdmin'
 import { CreateUser, DeleteUser, ModifyUser, CreatePostAdmin, ModifyPostAdmin, DeletePostAdmin } from '../admin/pages'
 import { UserProvider } from '../contexts/UserProvider'
+import { CardCompleto } from '../blog/components/CardCompleto'
+import { UserContext } from '../contexts/UserContext'
 
 
 
 export const AppRoutes = () => {
 
-    // const {isRegister,user}=useContext(userContext)
+    const { user, setUser, isRegister, setIsRegister } = useContext(UserContext)
 
-    const user = {
+    /* const user = {
         id: 1,
         role: 'editor',
         nombre: 'Pepe'
     }
-    const isRegister = true
+    const isRegister = true */
 
     return (
         <UserProvider>
@@ -27,7 +29,7 @@ export const AppRoutes = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<RegisterPublic />} />
                 <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:id" element={<Blog />} />
+                <Route path="/blog/:id" element={<CardCompleto />} />
 
                 {/* Rutas protegidas Editor*/}
                 {

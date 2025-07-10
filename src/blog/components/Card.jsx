@@ -9,6 +9,8 @@ export const Card = ({ item }) => {
     const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
 
     const deleteNoticia = () => {
+        console.log("delete id: ", item.id_post)
+
         Swal.fire({
             title: "Do you want to save the changes?",
             showConfirmButton: false,
@@ -19,7 +21,7 @@ export const Card = ({ item }) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isDenied) {
                 Swal.fire("Borrado", "", "success");
-                delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Delete`, item.id_post)
+                delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Delete`, { id_post: item.id_post })
                 //redirect("`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/dashboardEditor")
                 console.log(data)
             }
@@ -33,7 +35,7 @@ export const Card = ({ item }) => {
             <article>
                 <h2>{item.post_title}</h2>
                 <p>{item.user_name}</p>
-                <Link to={`blog/${item.id_post}`}>Ver</Link>
+                <Link to={`../blog/${item.id_post}`}>Ver</Link>
                 <Link to={`editar-post/${item.id_post}`}>Editar</Link>
                 <button onClick={deleteNoticia}>Borrar</button>
             </article>

@@ -20,7 +20,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
       setIsLoading(false);
       setData(noticias)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       setIsLoading(false)
       setIsError(error)
     }
@@ -105,8 +105,9 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
 
   const delet = async (url, body, header = {}) => {
     setIsLoading(true);
-    option = {
+    const options = {
       method: "DELETE",
+      body: JSON.stringify(body),
       headers: {
         ...header,
         "Content-Type": "application/json",
@@ -121,7 +122,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
       setIsLoading(false);
       setData(noticias)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       setIsLoading(false)
       setIsError(error)
     }
