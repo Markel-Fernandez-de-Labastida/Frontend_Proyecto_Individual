@@ -20,10 +20,11 @@ export const Card = ({ item }) => {
         }).then((result) => {
             /* Read more about isConfirmed, isDenied below */
             if (result.isDenied) {
-                Swal.fire("Borrado", "", "success");
-                delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Delete`, { id_post: item.id_post })
+                delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/delete/${item.id_post}`)
                 //redirect("`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/dashboardEditor")
-                console.log(data)
+                console.log("data borrar: ", data)
+                Swal.fire("Borrado", "", "success");
+                redirect("/editor");
             }
         });
 

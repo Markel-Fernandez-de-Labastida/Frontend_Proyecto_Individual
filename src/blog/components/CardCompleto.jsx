@@ -9,7 +9,7 @@ export const CardCompleto = (props) => {
     const { get, data, isLoading, isError } = useFetch();
 
     useEffect(() => {
-        get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/AllDetails/${id}`)
+        get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/allDetails/${id}`)
 
     }, [])
 
@@ -23,7 +23,7 @@ export const CardCompleto = (props) => {
                 <h2 className=''>{data.post_subtitle}</h2>
                 <div>
                     <p className=''>{data.user_name}</p>
-                    <p className=''>{data.date_insert.slice(0, 10)}</p>
+                    <p className=''>{data.date_insert?.slice(0, 10)}</p>
                 </div>
                 <p className=''>{data.post_content}</p>
             </article>

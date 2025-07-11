@@ -11,7 +11,7 @@ export const Navbar = () => {
         role: 'editor',
         nombre: 'Pepe'
     }
-    const isRegister = true
+    const isRegister = false
 
 
     return (

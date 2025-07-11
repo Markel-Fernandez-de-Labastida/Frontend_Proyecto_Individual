@@ -38,7 +38,7 @@ export const CreatePost = () => {
     useEffect(() => {
         Object.keys(formulario).length !== 0
             &&
-            create(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/Create`, formulario)
+            create(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/create`, formulario)
         console.log(data)
     }, [formulario])
 

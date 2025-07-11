@@ -10,10 +10,9 @@ import { CardCompleto } from '../blog/components/CardCompleto'
 import { UserContext } from '../contexts/UserContext'
 
 
-
 export const AppRoutes = () => {
 
-    const { user, setUser, isRegister, setIsRegister } = useContext(UserContext)
+    const { user, isRegister } = useContext(UserContext)
 
     /* const user = {
         id: 1,
@@ -23,27 +22,27 @@ export const AppRoutes = () => {
     const isRegister = true */
 
     return (
-        <UserProvider>
-            <Routes>
-                {/* Rutas públicas */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<RegisterPublic />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:id" element={<CardCompleto />} />
 
-                {/* Rutas protegidas Editor*/}
-                {
+        <Routes>
+            {/* Rutas públicas */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterPublic />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<CardCompleto />} />
 
-                    (isRegister && user.role == 'editor') &&
+            {/* Rutas protegidas Editor*/}
+            {
 
-                    <Route Route path="editor">
-                        <Route index element={<DashboardEditor />} />
-                        <Route path="nuevo-post" element={<CreatePost />} />
-                        <Route path="editar-post/:id" element={<ModifyPost />} />
-                    </Route>
-                }
+                /*                 (isRegister && user.role == 'editor') &&
+                 */
+                <Route Route path="editor">
+                    <Route index element={<DashboardEditor />} />
+                    <Route path="nuevo-post" element={<CreatePost />} />
+                    <Route path="editar-post/:id" element={<ModifyPost />} />
+                </Route>
+            }
 
-                {/* <Route
+            {/* <Route
                 path="/dashboardEditor"
                 element={
                     <DashboardEditor />
@@ -66,64 +65,63 @@ export const AppRoutes = () => {
                     < DeletePost />
                 } /> */}
 
-                {/* Rutas protegidas Administrador*/}
-                {/* 
+            {/* Rutas protegidas Administrador*/}
+            {/* 
             <Route path="admin">
                 <Route index element={<DashboarsAdmin />} />
                 <Route path=":city" element={<City />} />
                 <Route path="trending" element={<Trending />} />
             </Route> */}
 
-                <Route
-                    path='/dashboardAdmin'
-                    element={
-                        < DashboarsAdmin />
-                    } />
+            <Route
+                path='/dashboardAdmin'
+                element={
+                    < DashboarsAdmin />
+                } />
 
-                {/* Usuarios */}
+            {/* Usuarios */}
 
-                <Route
-                    path='/createUser'
-                    element={
-                        < CreateUser />
-                    } />
+            <Route
+                path='/createUser'
+                element={
+                    < CreateUser />
+                } />
 
-                <Route
-                    path='/updateUser'
-                    element={
-                        < ModifyUser />
-                    } />
+            <Route
+                path='/updateUser'
+                element={
+                    < ModifyUser />
+                } />
 
-                <Route
-                    path='/deleteUser'
-                    element={
-                        < DeleteUser />
-                    } />
-                {/* Blog */}
-                <Route
-                    path='/createPost'
-                    element={
-                        < CreatePostAdmin />
-                    } />
+            <Route
+                path='/deleteUser'
+                element={
+                    < DeleteUser />
+                } />
+            {/* Blog */}
+            <Route
+                path='/createPost'
+                element={
+                    < CreatePostAdmin />
+                } />
 
-                <Route
-                    path='/updatePost'
-                    element={
-                        < ModifyPostAdmin />
-                    } />
+            <Route
+                path='/updatePost'
+                element={
+                    < ModifyPostAdmin />
+                } />
 
-                <Route
-                    path='/DeletePost'
-                    element={
-                        < DeletePostAdmin />
-                    } />
+            <Route
+                path='/DeletePost'
+                element={
+                    < DeletePostAdmin />
+                } />
 
 
-                {/* Ruta de acceso denegado */}
-                <Route path="/unauthorized" element={<h2>Acceso no autorizado</h2>} />
-                <Route path='/*' element={< Navigate to={'./'} />} />
-            </Routes >
-        </UserProvider>
+            {/* Ruta de acceso denegado */}
+            <Route path="/unauthorized" element={<h2>Acceso no autorizado</h2>} />
+            <Route path='/*' element={< Navigate to={'./'} />} />
+        </Routes >
 
     )
 }

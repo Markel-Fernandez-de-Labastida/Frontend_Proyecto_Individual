@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { consultFetch } from '../api/consultFetch';
+import { UserContext } from '../contexts/UserContext';
 
 
 
 export const useFetch = (url, metodo, body = {}, header = {}) => {
+
+  const { user, setUser, isRegister, setRegister } = useContext(UserContext)
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +30,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
 
   }
 
-  const loginRegister = async (url, body, header = {}) => {
+  const login = async (url, body, header = {}) => {
     console.log("Dentro del fetch login")
     setIsLoading(true);
     const options = {
@@ -42,12 +45,39 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
 
     try {
       const response = await consultFetch(url, options)
-      console.log(response.data)
+      console.log("respuesta login: ", response.email)
+      const { data: noticias } = response
+      setIsLoading(false);
+      setData(noticias);
+    } catch (error) {
+      //console.log(error)
+      setIsLoading(false)
+      setIsError(error)
+    }
+
+  }
+
+  const register = async (url, body, header = {}) => {
+    console.log("Dentro del fetch register")
+    setIsLoading(true);
+    const options = {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        ...header,
+        "Content-Type": "application/json",
+      }
+    }
+
+
+    try {
+      const response = await consultFetch(url, options)
+      console.log("respuesta register: ", response)
       const { data: noticias } = response
       setIsLoading(false);
       setData(noticias)
     } catch (error) {
-      console.log(error)
+      //console.log(error)
       setIsLoading(false)
       setIsError(error)
     }
@@ -107,7 +137,6 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
     setIsLoading(true);
     const options = {
       method: "DELETE",
-      body: JSON.stringify(body),
       headers: {
         ...header,
         "Content-Type": "application/json",
@@ -131,7 +160,8 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
 
   return {
     get,
-    loginRegister,
+    login,
+    register,
     update,
     create,
     delet,
