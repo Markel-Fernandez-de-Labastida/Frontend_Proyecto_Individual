@@ -31,14 +31,14 @@ export const ModifyPost = () => {
     }
 
 
-    const { handleSubmit, formulario, enviado } = useForm({});
 
-    const { get, loginRegister, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+    const { get, loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
+
+    const { handleSubmit, formulario, enviado } = useForm(data);
 
     useEffect(() => {
         get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/allDetails/${id}`)
     }, [])
-
 
     useEffect(() => {
         Object.keys(formulario).length !== 0 && update(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/update`, formulario)
@@ -56,7 +56,7 @@ export const ModifyPost = () => {
 
             <form action="#" method="post" onSubmit={handleSubmit}>
                 <input type="hidden" name="post_user" id='post_user' value={`${data.id_post}`} />
-                <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' value={data.post_title} />
+                <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' value={formulario.post_title} />
                 <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' value={data.post_subtitle} />
                 {/* TODO: Usar react det text = React Jodit WYSIWYG Editor */}
                 <JoditEditor

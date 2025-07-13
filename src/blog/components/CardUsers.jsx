@@ -3,8 +3,9 @@ import { CardCompleto } from './CardCompleto'
 import { Link, redirect } from 'react-router';
 import Swal from 'sweetalert2';
 import { useFetch } from '../../hooks/useFetch';
+import { DeleteUser } from '../../admin/pages';
 
-export const Card = ({ item }) => {
+export const CardUsers = ({ item }) => {
 
     const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
 
@@ -38,7 +39,7 @@ export const Card = ({ item }) => {
                 <p>{item.user_name}</p>
                 <Link to={`../blog/${item.id_post}`}>Ver</Link>
                 <Link to={`editar-post/${item.id_post}`}>Editar</Link>
-                <button onClick={deleteNoticia}>Borrar</button>
+                <button onClick={DeleteUser}>Borrar</button>
             </article>
         </>
     )

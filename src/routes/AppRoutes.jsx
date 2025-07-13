@@ -12,7 +12,7 @@ import { UserContext } from '../contexts/UserContext'
 
 export const AppRoutes = () => {
 
-    const { user, isRegister } = useContext(UserContext)
+    /*    const { user, isRegister } = useContext(UserContext) */
 
     /* const user = {
         id: 1,
@@ -66,21 +66,21 @@ export const AppRoutes = () => {
                 } /> */}
 
             {/* Rutas protegidas Administrador*/}
-            {/* 
+
             <Route path="admin">
                 <Route index element={<DashboarsAdmin />} />
-                <Route path=":city" element={<City />} />
-                <Route path="trending" element={<Trending />} />
-            </Route> */}
-
+                <Route path="nuevo-usuario" element={<CreateUser />} />
+                <Route path="editar-usuario/:id" element={<ModifyUser />} />
+            </Route>
+            {/*
             <Route
                 path='/dashboardAdmin'
                 element={
                     < DashboarsAdmin />
                 } />
-
+            */}
             {/* Usuarios */}
-
+            {/*
             <Route
                 path='/createUser'
                 element={
@@ -98,7 +98,9 @@ export const AppRoutes = () => {
                 element={
                     < DeleteUser />
                 } />
+            /*}
             {/* Blog */}
+            {/*
             <Route
                 path='/createPost'
                 element={
@@ -116,7 +118,7 @@ export const AppRoutes = () => {
                 element={
                     < DeletePostAdmin />
                 } />
-
+            */}
 
             {/* Ruta de acceso denegado */}
             <Route path="/unauthorized" element={<h2>Acceso no autorizado</h2>} />

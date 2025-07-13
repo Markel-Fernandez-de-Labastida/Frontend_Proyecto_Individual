@@ -6,7 +6,7 @@ import { UserContext } from '../contexts/UserContext';
 
 export const useFetch = (url, metodo, body = {}, header = {}) => {
 
-  const { user, setUser, isRegister, setRegister } = useContext(UserContext)
+  const { user, setUser, isRegister, logoutContext, loginContext } = useContext(UserContext);
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -42,13 +42,12 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
       }
     }
 
-
     try {
       const response = await consultFetch(url, options)
-      console.log("respuesta login: ", response.email)
-      const { data: noticias } = response
+      console.log("respuesta login: ", response)
+      //const { user } = response
       setIsLoading(false);
-      setData(noticias);
+      setData(response);
     } catch (error) {
       //console.log(error)
       setIsLoading(false)
