@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useFetch } from '../../hooks/useFetch';
 import { Card } from './Card';
+import { useFetch } from '../../../hooks/useFetch';
 
 export const GridUsuarios = () => {
 

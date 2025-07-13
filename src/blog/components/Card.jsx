@@ -1,15 +1,14 @@
 import React from 'react'
-import { CardCompleto } from './CardCompleto'
+//import { CardCompleto } from './CardCompleto'
 import { Link, redirect } from 'react-router';
 import Swal from 'sweetalert2';
 import { useFetch } from '../../hooks/useFetch';
-import { DeleteUser } from '../../admin/pages';
 
-export const CardUsers = ({ item }) => {
+export const Card = ({ item }) => {
 
     const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
 
-    const deleteNoticia = () => {
+    const deletePost = () => {
         console.log("delete id: ", item.id_post)
 
         Swal.fire({
@@ -39,7 +38,7 @@ export const CardUsers = ({ item }) => {
                 <p>{item.user_name}</p>
                 <Link to={`../blog/${item.id_post}`}>Ver</Link>
                 <Link to={`editar-post/${item.id_post}`}>Editar</Link>
-                <button onClick={DeleteUser}>Borrar</button>
+                <button onClick={deletePost}>Borrar</button>
             </article>
         </>
     )

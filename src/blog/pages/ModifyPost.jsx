@@ -57,7 +57,7 @@ export const ModifyPost = () => {
             <form action="#" method="post" onSubmit={handleSubmit}>
                 <input type="hidden" name="post_user" id='post_user' value={`${data.id_post}`} />
                 <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' value={formulario.post_title} />
-                <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' value={data.post_subtitle} />
+                <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' value={formulario.post_subtitle} />
                 {/* TODO: Usar react det text = React Jodit WYSIWYG Editor */}
                 <JoditEditor
                     ref={editor}
