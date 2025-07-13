@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useFetch } from '../../hooks/useFetch';
-import { Card } from './Card';
+import { Card } from './CardUsers';
 
 export const GridNoticias = (/* id_post, user_name, post_title, post_subtitle, post_content, date_insert */) => {
 
