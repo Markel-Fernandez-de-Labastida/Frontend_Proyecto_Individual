@@ -1,7 +1,7 @@
 export const Dashboard = () => {
     const handleLogout = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('role');
+        //localStorage.removeItem('token');
+        //localStorage.removeItem('role');
         window.location.href = '/login';
     };
 

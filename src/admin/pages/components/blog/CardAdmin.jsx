@@ -1,0 +1,46 @@
+import React from 'react'
+import { CardCompleto } from './CardCompleto'
+import { Link, redirect } from 'react-router';
+import Swal from 'sweetalert2';
+import { useFetch } from '../../../../hooks/useFetch';
+import { DeleteUser } from '../..';
+
+export const CardUsers = ({ item }) => {
+
+    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
+
+    const deleteNoticia = () => {
+        console.log("delete id: ", item.id_post)
+
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showConfirmButton: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            denyButtonText: `Eliminar`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isDenied) {
+                delet(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/delete/${item.id_post}`)
+                //redirect("`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/dashboardEditor")
+                console.log("data borrar: ", data)
+                Swal.fire("Borrado", "", "success");
+                redirect("/editor");
+            }
+        });
+
+    }
+
+
+    return (
+        <>
+            <article>
+                <h2>{item.post_title}</h2>
+                <p>{item.user_name}</p>
+                <Link to={`../blog/${item.id_post}`}>Ver</Link>
+                <Link to={`editar-post/${item.id_post}`}>Editar</Link>
+                <button onClick={DeleteUser}>Borrar</button>
+            </article>
+        </>
+    )
+}

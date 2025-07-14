@@ -67,6 +67,7 @@ export const useForm = (initialState) => {
         handleSubmit,
         //handleChange,
         formulario,
-        enviado
+        enviado,
+        setFormulario
     }
 }

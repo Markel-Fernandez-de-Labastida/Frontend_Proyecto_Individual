@@ -1,6 +1,6 @@
 
 export const consultFetch = async (url, option = {}) => {
-  console.log({ url });
+  // console.log({ url });
   /*let option;
 
    if (method === "POST" || method === "PUT") {
@@ -26,16 +26,17 @@ export const consultFetch = async (url, option = {}) => {
     //TODO: Comprobar que funciona
     const answer = await fetch(url, option);
 
-    console.log("respuesta: ", answer);
-    const data = await answer.json();
+    // console.log("respuesta: ", answer);
+
     if (!answer.ok) {
-      console.log("STATUS:", data);
-      throw "error";
+      // console.log("STATUS:", data);
+      throw data;
     }
+    const data = await answer.json();
     return data;
   } catch (error) {
-    console.log(error);
-    return error;
+    // console.log(error);
+    throw new Error(error);
   }
 };
 
