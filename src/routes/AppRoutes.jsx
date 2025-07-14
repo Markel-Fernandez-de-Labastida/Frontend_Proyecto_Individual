@@ -63,15 +63,17 @@ export const AppRoutes = () => {
 
             {/* Rutas protegidas Administrador*/}
 
+            {
 
-            <Route path="admin">
-                <Route index element={<DashboarsAdmin />} />
-                <Route path="nuevo-usuario" element={<CreateUser />} />
-                <Route path="editar-usuario/:id" element={<ModifyUser />} />
-            </Route>
+                (isRegister && user.role == 1) &&
 
+                <Route path="admin">
+                    <Route index element={<DashboarsAdmin />} />
+                    <Route path="nuevo-usuario" element={<CreateUser />} />
+                    <Route path="editar-usuario/:id" element={<ModifyUser />} />
+                </Route>
 
-
+            }
 
             {/*
             <Route
