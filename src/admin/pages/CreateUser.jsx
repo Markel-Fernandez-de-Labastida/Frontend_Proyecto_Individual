@@ -24,7 +24,7 @@ export const CreateUser = () => {
     useEffect(() => {
         Object.keys(formulario).length !== 0
             &&
-            create(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users/Create`, formulario)
+            create(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/register`, formulario)
         console.log(data)
     }, [formulario])
 
@@ -33,13 +33,13 @@ export const CreateUser = () => {
     return (
         <>
             <div>
-                <p>Crear noticias</p>
+                <p>Crear Usuario</p>
             </div>
 
             <form action="#" method="post" onSubmit={handleSubmit}>
                 <input type="text" name="user_name" id="user_name" placeholder='Nombre del usuario' />
-                <input type='password' name='user_password' id="user_password" placeholder='Contraseña del usuario' />
                 <input type="text" name="user_email" id="user_email" placeholder='Email del usuario' />
+                <input type='password' name='user_password' id="user_password" placeholder='Contraseña del usuario' />
                 <input type="hidden" name="user_role" id="user_role" value={2} />
 
                 <button type="submit">Crear usuario</button>

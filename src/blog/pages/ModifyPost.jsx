@@ -12,7 +12,6 @@ export const ModifyPost = () => {
     // TODO: Recoger desde el token el id del usuario editor
     // React Jodit WYSIWYG Editor
     const editor = useRef(null);
-    const [content, setContent] = useState('');
 
     const config = useMemo(
         () => ({
@@ -25,24 +24,29 @@ export const ModifyPost = () => {
             //placeholder: post_content
         }), []);
 
+
+    const { get, update, data, isLoading, isError } = useFetch();
+
+    // console.log(data)
+
+    const { handleSubmit, formulario, setFormulario } = useForm(data);
+
     const formatDate = () => {
         const dateObj = new Date();
         return dateObj.toISOString().slice(0, 10);
     }
 
 
-
-    const { get, loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
-
-    const { handleSubmit, formulario, enviado } = useForm(data);
-
     useEffect(() => {
         get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/allDetails/${id}`)
+        setFormulario(data)
+
     }, [])
 
     useEffect(() => {
         Object.keys(formulario).length !== 0 && update(`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/update`, formulario)
-        console.log(data)
+
+
     }, [formulario])
 
 
@@ -51,27 +55,39 @@ export const ModifyPost = () => {
         <>
             <div>
                 <p>Editar noticia</p>
+                {JSON.stringify(data)}
+                {JSON.stringify(formulario)}
 
             </div>
 
-            <form action="#" method="post" onSubmit={handleSubmit}>
-                <input type="hidden" name="post_user" id='post_user' value={`${data.id_post}`} />
-                <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' value={formulario.post_title} />
-                <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' value={formulario.post_subtitle} />
-                {/* TODO: Usar react det text = React Jodit WYSIWYG Editor */}
-                <JoditEditor
-                    ref={editor}
-                    value={data.post_content}
-                    config={config}
-                    tabIndex={1}
-                    name="post_content" id="post_content"
-                //placeholder='Contenido de la noticia'
-                />
-                {/*<input type="text" name="post_content" id="post_content" placeholder='Contenido de la noticia' />*/}
-                <input type="hidden" name="date_insert" id='date_insert' value={formatDate()} />
+            {
+                isLoading ?
+                    <p>CARGANDO ....</p>
+                    :
+                    isError ?
+                        <p>{isError}</p>
+                        :
+                        <form action="#" method="post" onSubmit={handleSubmit}>
+                            <input type="hidden" name="id_post" id='id_post' value={data.id_post} />
+                            <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' />
+                            <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' />
+                            {/* TODO: Usar react det text = React Jodit WYSIWYG Editor */}
+                            <JoditEditor
+                                ref={editor}
+                                value={data.post_content}
+                                config={config}
+                                tabIndex={1}
+                                name="post_content" id="post_content"
+                            //placeholder='Contenido de la noticia'
+                            />
+                            {/*<input type="text" name="post_content" id="post_content" placeholder='Contenido de la noticia' />*/}
+                            <input type="hidden" name="date_insert" id='date_insert' value={formatDate()} />
 
-                <button type="submit">Crear noticia</button>
-            </form>
+                            <button type="submit">Modificar noticia</button>
+                        </form>
+            }
+
+
         </>
 
     )

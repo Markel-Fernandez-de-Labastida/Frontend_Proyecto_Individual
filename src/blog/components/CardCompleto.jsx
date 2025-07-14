@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useParams } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
+import { Card } from 'react-bootstrap';
 
 
 export const CardCompleto = (props) => {
@@ -16,20 +17,18 @@ export const CardCompleto = (props) => {
 
     return (
         <>
-            <h1>HOLAAAAA CARD COMPLETO</h1>
-            {JSON.stringify(data)}
-            <article key={''} className=''>
-                <p data-id_post={data.id_post}></p>
-                <h1 className=''>{data.post_title}</h1>
-                <h2 className=''>{data.post_subtitle}</h2>
-                <div>
-                    <p className=''>{data.user_name}</p>
-                    <p className=''>{data.date_insert?.slice(0, 10)}</p>
-                </div>
-                {/* <p className=''>{data.post_content}</p> */}
+            <h1>{data.post_title}</h1>
+            <Card >
+                <Card.Body>
+                    <Card.Text className="fs-3">{data.post_subtitle}</Card.Text>
+                    <Card.Text >{data.post_content}</Card.Text>
+                    <Card.Body>
+                        <Card.Text >{data.user_name}</Card.Text>
+                        <Card.Text >{data.date_insert?.slice(0, 10)}</Card.Text>
+                    </Card.Body>
+                </Card.Body>
+            </Card>
 
-                <p className=''>{data.post_content}</p>
-            </article>
         </>
     )
 }

@@ -12,6 +12,7 @@ export const ModifyUser = () => {
 
     useEffect(() => {
         get(`${import.meta.env.VITE_BACKEND_URL}/api/v1/users/UserById/${id}`)
+
     }, [])
 
     useEffect(() => {
@@ -21,13 +22,9 @@ export const ModifyUser = () => {
 
     return (
         <>
-
             <form action="#" method="post" onSubmit={handleSubmit}>
-                <input type="hidden" name="id_user" id="id_user" placeholder='Nombre del usuario' value={formulario.id_user} />
-                <input type="hidden" name="user_name" id="user_name" placeholder='Nombre del usuario' value={formulario.user_name} />
-                <input type="hidden" name='user_password' id="user_password" placeholder='Contraseña del usuario' value={formulario.user_password} />
-                <input type="hidden" name="user_email" id="user_email" placeholder='Email del usuario' value={formulario.user_email} />
-                <input type="text" name="user_role" id="user_role" value={data.role_name} />
+                <input type="text" name="user_role" id="user_role" placeholder='nuevo rol' />
+                <input type="hidden" name="user_id" id='user_id' value={id} />
 
                 <button type="submit">Modificar usuario</button>
             </form>

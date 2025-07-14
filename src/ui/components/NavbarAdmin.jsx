@@ -66,7 +66,7 @@ export const NavbarAdmin = () => {
                         &&
                         <>
                             <NavLink
-                                to='/editor'
+                                to='/admin'
                                 className={({ isActive }) => isActive ? 'activo' : ''}>
                                 Dashboard
                             </NavLink>

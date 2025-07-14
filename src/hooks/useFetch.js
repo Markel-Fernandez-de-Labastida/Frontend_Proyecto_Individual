@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { consultFetch } from '../api/consultFetch';
 import { UserContext } from '../contexts/UserContext';
+import { useNavigate } from 'react-router';
 
 
 
-export const useFetch = (url, metodo, body = {}, header = {}) => {
+export const useFetch = () => {
 
-  const { user, setUser, isRegister, logoutContext, loginContext } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const { user, setUser, isRegister, setRegister } = useContext(UserContext)
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -48,6 +51,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
       //const { user } = response
       setIsLoading(false);
       setData(response);
+      settoken(response.token)
     } catch (error) {
       //console.log(error)
       setIsLoading(false)
@@ -55,6 +59,13 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
     }
 
   }
+
+
+  const settoken = (token) => {
+    localStorage.setItem('token', token)
+    navigate("/")
+  }
+
 
   const register = async (url, body, header = {}) => {
     console.log("Dentro del fetch register")
@@ -85,6 +96,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
 
   const update = async (url, body, header = {}) => {
     setIsLoading(true);
+    console.log("update body: ", body)
     const options = {
       method: "PUT",
       body: JSON.stringify(body),
@@ -98,6 +110,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
       const response = await consultFetch(url, options)
       console.log(response.data)
       const { data: noticias } = response
+      console.log("update data: ", data);
       setIsLoading(false);
       setData(noticias)
     } catch (error) {
@@ -164,6 +177,7 @@ export const useFetch = (url, metodo, body = {}, header = {}) => {
     update,
     create,
     delet,
+    setData,
     data,
     isLoading,
     isError

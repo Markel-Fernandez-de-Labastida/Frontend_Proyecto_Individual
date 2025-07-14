@@ -63,7 +63,7 @@ export const RegisterPublic = () => {
                 type="hidden"
                 id="user_role"
                 name="user_role"
-                value="2">
+                value="3">
             </input>
             {/* <select
                 value={formData.role}

@@ -1,10 +1,13 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router';
 import { useFetch } from '../../hooks/useFetch';
 import { useForm } from '../../hooks/useForm';
 import JoditEditor from 'jodit-react';
+import { UserContext } from '../../contexts/UserContext';
 
 export const CreatePost = () => {
+
+    const { user, setUser, isRegister, setRegister } = useContext(UserContext)
 
     const navigate = useNavigate();
 
@@ -51,7 +54,7 @@ export const CreatePost = () => {
             </div>
 
             <form action="#" method="post" onSubmit={handleSubmit}>
-                <input type="hidden" name="post_user" id='post_user' value={1} />
+                <input type="hidden" name="post_user" id='post_user' value={user.id} />
                 <input type="text" name="post_title" id="post_title" placeholder='Titulo de la noticia' />
                 <input type='text' name='post_subtitle' id="post_subtitle" placeholder='Subtitulo de la noticia' />
                 {/* TODO: Usar react det text = React Jodit WYSIWYG Editor */}

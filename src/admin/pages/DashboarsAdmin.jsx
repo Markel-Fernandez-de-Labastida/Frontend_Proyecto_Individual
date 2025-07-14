@@ -2,6 +2,8 @@ import React, { useContext } from 'react'
 import { GridUsuarios } from './components/GridUsuarios'
 import { UserContext } from '../../contexts/UserContext'
 import { Link } from 'react-router'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 export const DashboarsAdmin = () => {
     const { user, setUser, isRegister, setRegister } = useContext(UserContext)
@@ -16,7 +18,7 @@ export const DashboarsAdmin = () => {
 
             <GridUsuarios />
 
-            <Link to={`nuevo-post`} >Nueva noticia</Link>
+            <Link to={`/nuevo-usuario`} >Nuevo usuario</Link>
         </>
 
     )

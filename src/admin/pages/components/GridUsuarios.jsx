@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Card } from './Card';
+import { CardAd } from './CardAd';
 import { useFetch } from '../../../hooks/useFetch';
 
 export const GridUsuarios = () => {
@@ -16,7 +16,7 @@ export const GridUsuarios = () => {
             <section>
 
 
-                <p>DATA</p>       {JSON.stringify(data)}
+                {/* <p>DATA</p>       {JSON.stringify(data)} */}
 
                 <div className='card-container'>
                     {
@@ -31,10 +31,10 @@ export const GridUsuarios = () => {
                                 :
                                 /* llamar a la api y crear una card por cada resultado */
                                 <>
-                                    <p>Sin error</p>
+                                    {/* <p>Sin error</p> */}
                                     {data.map((item) => (
                                         // <h1>CARD EN EL MAP {JSON.stringify(item)}</h1>
-                                        <Card key={item.id_post} item={item} />
+                                        <CardAd key={item.id_post} item={item} />
 
 
                                     ))}

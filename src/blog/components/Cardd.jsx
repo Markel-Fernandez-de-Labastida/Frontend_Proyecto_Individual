@@ -1,12 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 //import { CardCompleto } from './CardCompleto'
-import { Link, redirect } from 'react-router';
+import { Link, redirect, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { useFetch } from '../../hooks/useFetch';
+import { UserContext } from '../../contexts/UserContext';
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
-export const Card = ({ item }) => {
+export const Cardd = ({ item }) => {
 
-    const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
+    const { user, isRegister } = useContext(UserContext);
+
+    const navigate = useNavigate();
+
+    const { delet, data } = useFetch();
 
     const deletePost = () => {
         console.log("delete id: ", item.id_post)
@@ -24,8 +31,9 @@ export const Card = ({ item }) => {
                 //redirect("`${import.meta.env.VITE_BACKEND_URL}/api/v1/blog/dashboardEditor")
                 console.log("data borrar: ", data)
                 Swal.fire("Borrado", "", "success");
-                redirect("/editor");
+                navigate("/editor");
             }
+
         });
 
     }
@@ -33,13 +41,17 @@ export const Card = ({ item }) => {
 
     return (
         <>
-            <article>
-                <h2>{item.post_title}</h2>
-                <p>{item.user_name}</p>
-                <Link to={`../blog/${item.id_post}`}>Ver</Link>
-                <Link to={`editar-post/${item.id_post}`}>Editar</Link>
-                <button onClick={deletePost}>Borrar</button>
-            </article>
+            {/* {JSON.stringify(user)} */}
+
+            <Card >
+                <Card.Body>
+                    <Card.Title>{item.post_title}</Card.Title>
+                    <Card.Text>{item.user_name}</Card.Text>
+
+                    <Button variant='light'><Link to={`../blog/${item.id_post}`}>Ver</Link></Button>
+                </Card.Body>
+            </Card>
+
         </>
     )
 }

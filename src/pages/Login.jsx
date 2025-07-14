@@ -5,49 +5,47 @@ import { useForm } from '../hooks/useForm.js';
 import { UserContext } from '../contexts/UserContext.jsx';
 
 export const Login = () => {
-    const { user, setUser, isRegister, logoutContext, loginContext } = useContext(UserContext);
 
 
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const { handleSubmit, formulario, enviado } = useForm({});
 
     const { login, register, update, create, delet, data, isLoading, isError } = useFetch(formulario);
+    const { user } = useContext(UserContext)
 
 
 
     useEffect(() => {
-        Object.keys(formulario).length !== 0 && login(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/login`, formulario)
+        Object.keys(formulario).length !== 0 && login(`${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/login`, formulario);
 
-        if (isRegister && user.user_role == 2) {
-            redirect("/editor");
-        }
+        /* if (isRegister && user.user_role == 2) {
+            navigate("/editor");
+        } */
 
     }, [formulario])
 
-    let firstUpdate = useRef(false);
-    useEffect(() => {
-        if (firstUpdate.current) {
-            console.log("Pasa por setEstorage");
-            if (data.token !== "") {
-                localStorage.setItem("token", data.token);
-            }
-            //setUser(newUser)
-            //loginContext()
-        }
-        firstUpdate.current = true;
-    }, [data])
+    // let firstUpdate = useRef(false);
+    // console.log({ firstUpdate })
+    // useEffect(() => {
+    //     if (firstUpdate.current) {
+    //         console.log("Pasa por setEstorage: ", data.token);
+    //         localStorage.setItem("token", data.token);
+    //         //loginContext()
+    //     }
+    //     firstUpdate.current = true;
+    //     console.log({ firstUpdate })
+    // }, [data])
 
 
 
     return (
         <>
-            {JSON.stringify(formulario)}
-            {JSON.stringify(data)}
+
             {JSON.stringify(user)}
 
             <form onSubmit={handleSubmit}>
-                <h2>Iniciar Sesión</h2>
+                <h2 className=''>Iniciar Sesión</h2>
                 <input
                     type="text"
                     id="user_email"

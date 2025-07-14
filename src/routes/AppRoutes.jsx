@@ -2,9 +2,9 @@ import React, { useContext } from 'react'
 import { Navigate, Route, Router, Routes } from 'react-router'
 import { Blog, Dashboard, Login, RegisterPublic } from '../pages'
 import { ProtectedRoute } from '../utils/protectedRoute'
-import { CreatePost, DashboardEditor, DeletePost, ModifyPost } from '../blog/pages'
+import { CreatePost, DashboardEditor, ModifyPost } from '../blog/pages'
 import { DashboarsAdmin } from '../admin/pages/DashboarsAdmin'
-import { CreateUser, ModifyUser, CreatePostAdmin } from '../admin/pages'
+import { ModifyUser, CreatePostAdmin, CreateUser } from '../admin/pages'
 import { UserProvider } from '../contexts/UserProvider'
 import { CardCompleto } from '../blog/components/CardCompleto'
 import { UserContext } from '../contexts/UserContext'
@@ -12,14 +12,10 @@ import { UserContext } from '../contexts/UserContext'
 
 export const AppRoutes = () => {
 
-    /*    const { user, isRegister } = useContext(UserContext) */
+    const { user, isRegister } = useContext(UserContext)
 
-    /* const user = {
-        id: 1,
-        role: 'editor',
-        nombre: 'Pepe'
-    }
-    const isRegister = true */
+    // Roles: 1. Admin; 2. Editor; 3. Base
+
 
     return (
 
@@ -27,14 +23,14 @@ export const AppRoutes = () => {
             {/* Rutas públicas */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<RegisterPublic />} />
-            <Route path="/blog" element={<Blog />} />
+            <Route path="/" element={<Blog />} />
             <Route path="/blog/:id" element={<CardCompleto />} />
 
             {/* Rutas protegidas Editor*/}
             {
 
-                /*                 (isRegister && user.role == 'editor') &&
-                 */
+                (isRegister && user.role == 2) &&
+
                 <Route Route path="editor">
                     <Route index element={<DashboardEditor />} />
                     <Route path="nuevo-post" element={<CreatePost />} />
@@ -67,11 +63,16 @@ export const AppRoutes = () => {
 
             {/* Rutas protegidas Administrador*/}
 
+
             <Route path="admin">
                 <Route index element={<DashboarsAdmin />} />
                 <Route path="nuevo-usuario" element={<CreateUser />} />
                 <Route path="editar-usuario/:id" element={<ModifyUser />} />
             </Route>
+
+
+
+
             {/*
             <Route
                 path='/dashboardAdmin'

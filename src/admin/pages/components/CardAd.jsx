@@ -3,8 +3,10 @@ import { CardCompleto } from './CardCompleto'
 import { Link, redirect } from 'react-router';
 import Swal from 'sweetalert2';
 import { useFetch } from '../../../hooks/useFetch';
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
-export const Card = ({ item }) => {
+export const CardAd = ({ item }) => {
 
     const { loginRegister, update, create, delet, data, isLoading, isError } = useFetch();
 
@@ -33,13 +35,26 @@ export const Card = ({ item }) => {
 
     return (
         <>
-            <article>
+
+            <Card >
+                <Card.Body>
+                    <Card.Title>{item.user_name}</Card.Title>
+                    <Card.Text>{item.user_email}</Card.Text>
+                    <Card.Text>{item.role_name}</Card.Text>
+
+                    <Button variant='light'><Link to={`editar-usuario/${item.id_user}`}>Editar usuario</Link></Button>
+                    <Button variant='danger' onClick={deleteUsuario}>Borrar</Button>
+                </Card.Body>
+            </Card>
+
+
+            {/* <article>
                 <h2>{item.user_name}</h2>
                 <p>{item.user_email}</p>
                 <p>{item.role_name}</p>
                 <Link to={`editar-usuario/${item.id_user}`}>Editar</Link>
                 <button onClick={deleteUsuario}>Borrar</button>
-            </article>
+            </article> */}
         </>
     )
 }

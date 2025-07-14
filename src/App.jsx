@@ -1,23 +1,26 @@
 
 import './App.css'
 import { AppRoutes } from './routes/AppRoutes'
-import { Navbar } from './ui/components/Navbar'
+import { Footer } from './ui/components/Footer'
+import { Navbarr } from './ui/components/Navbarr'
 
 function App() {
   return (
     <>
       <>
-        <header>
+        {/*         <header>
           <p>Header</p>
-        </header>
+        </header> */}
 
-        <Navbar />
+        <Navbarr />
 
         <AppRoutes />
 
-        <footer>
+        <Footer />
+
+        {/* <footer>
           <p>Footer</p>
-        </footer>
+        </footer> */}
       </>
     </>
   )
